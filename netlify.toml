@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# SPA fallback so deep links like /product/PRN-001 and /admin load on refresh
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

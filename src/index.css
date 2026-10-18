@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #121212;
+  --color-coal: #1c1c1c;
+  --color-smoke: #2a2a2a;
+  --color-ash: #8a8a85;
+  --color-bone: #f3f1ec;
+  --color-paper: #fbfaf7;
+  --color-volt: #d7f25c;
+  --color-volt-dark: #b9d43f;
+  --color-ember: #e5533d;
+
+  --font-display: "Anton", "Impact", sans-serif;
+  --font-sans: "Archivo", ui-sans-serif, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-rise: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+  }
+  ::selection { @apply bg-volt text-ink; }
+  :focus-visible { @apply outline-2 outline-offset-2 outline-volt-dark; }
+}
+
+@utility display { @apply font-display uppercase leading-[0.9] tracking-[0.005em]; }
+@utility eyebrow { @apply font-mono text-[11px] uppercase tracking-[0.22em]; }
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 px-6 h-12 text-sm font-bold uppercase tracking-wider transition duration-200 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none;
+}
+@utility btn-volt { @apply btn bg-volt text-ink hover:bg-ink hover:text-volt; }
+@utility btn-ink { @apply btn bg-ink text-paper hover:bg-volt hover:text-ink; }
+@utility btn-ghost { @apply btn border border-current hover:bg-ink hover:text-paper hover:border-ink; }
+@utility btn-whatsapp { @apply btn bg-[#1faa53] text-white hover:bg-[#178a43]; }
+@utility field {
+  @apply w-full h-12 px-4 bg-white border border-ink/15 text-ink placeholder:text-ash transition focus:border-ink focus:outline-none;
+}
+@utility field-error { @apply border-ember; }
+@utility label { @apply block text-xs font-bold uppercase tracking-wider mb-2; }
+@utility container-x { @apply mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-10; }
+@utility grain {
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.07;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
